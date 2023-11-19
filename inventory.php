@@ -37,7 +37,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">EFD PANEL</span>
       </a>
@@ -264,7 +264,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -275,35 +275,35 @@
       <li class="nav-heading">Menu</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed " href="assets.html">
+        <a class="nav-link collapsed " href="assets.php">
           <i class="bi bi-cpu-fill"></i>
           <span>Assets</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed " href="customer.html">
+        <a class="nav-link collapsed " href="customer.php">
           <i class="bi bi-question-circle"></i>
           <span>Customer</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="inventory.html">
+        <a class="nav-link " href="Inventory.php">
           <i class="bi bi-envelope"></i>
           <span>Inventory</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="report.html">
+        <a class="nav-link collapsed" href="report.php">
           <i class="bi bi-card-list"></i>
           <span>Reports</span>
         </a>
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="login.php">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Log Out</span>
         </a>
@@ -321,7 +321,7 @@
         <h1>Inventory Table</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item">Tables</li>
             <li class="breadcrumb-item active">Data</li>
           </ol>
