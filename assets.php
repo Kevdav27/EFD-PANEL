@@ -37,7 +37,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
+      <a href="dashboard.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">EFD PANEL</span>
       </a>
@@ -264,7 +264,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link collapsed" href="dashboard.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -321,7 +321,7 @@
         <h1>EFD Table</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
             <li class="breadcrumb-item">Tables</li>
             <li class="breadcrumb-item active">Data</li>
           </ol>

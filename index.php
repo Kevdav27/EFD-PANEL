@@ -1,3 +1,34 @@
+<?php
+session_start();
+include('includes/config.php');
+if(isset($_POST['login']))
+{
+$username=$_POST['username'];
+$password=$_POST['password'];
+$stmt=$mysqli->prepare("SELECT username,email,password,id FROM report WHERE (username=?|| email=?) and password=? ");
+				$stmt->bind_param('sss',$username,$username,$password);
+				$stmt->execute();
+				$stmt -> bind_result($username,$username,$password,$id);
+				$rs=$stmt->fetch();
+				$_SESSION['id']=$id;
+				$uip=$_SERVER['REMOTE_ADDR'];
+				$ldate=date('d/m/Y h:i:s', time());
+				if($rs)
+				{
+               
+					header("location:dashboard.php");
+				}
+
+				else
+				{
+					echo "<script>alert('Invalid Username/Email or password');</script>";
+				}
+			}
+				?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +36,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>EFD PANEL</title>
+  <title>Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,557 +57,81 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!--  Main CSS File -->
+  <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
- 
+
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  <main>
+    <div class="container">
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">EFD PANEL</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
+              <div class="d-flex justify-content-center py-4">
+                <a href="dashboard.php" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">EFD PANEL</span>
+                </a>
+              </div><!-- End Logo -->
 
-      </form>
-    </div><!-- End Search Bar -->
-
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-
-          </a>
-        </li><!-- End Search Icon-->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="index.php">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-    
-
-      <li class="nav-heading">Menu</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="assets.php">
-          <i class="bi bi-cpu-fill"></i>
-          <span>Assets</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="customer.php">
-          <i class="bi bi-question-circle"></i>
-          <span>Customer</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="Inventory.php">
-          <i class="bi bi-envelope"></i>
-          <span>Inventory</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="report.php">
-          <i class="bi bi-card-list"></i>
-          <span>Reports</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="login.php">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Log Out</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-
-  
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <section class="section dashboard">
-      <div class="row">
-
-        <!-- Left side columns -->
-      
-          <div class="row">
-
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
+              <div class="card mb-3">
 
                 <div class="card-body">
-                  <h5 class="card-title">EFDs <span>| Today</span></h5>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                      
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Pending... <span>| Waiting for parts</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>264</h6>
-                    
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>1244</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                    </div>
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                    <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
+                  <form class="row g-3 needs-validation"  method="post" novalidate>
+
+                    <div class="col-12">
+                      <label for="yourUsername" class="form-label">Username</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <div class="invalid-feedback">Please enter your username.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit" name="login">Login</button>
+                    </div>
+                    <div class="col-12">
+                      <p class="small mb-0">Don't have account? <a href="report.php">Create an account</a></p>
+                    </div>
+                  </form>
+
                 </div>
               </div>
 
-            </div><!-- End Customers Card -->
-
-       
-
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                        <td>$64</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                        <td>$147</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
-
-
-            
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Line Chart</h5>
-
-              <!-- Line Chart -->
-              <div id="lineChart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#lineChart"), {
-                    series: [{
-                      name: "EFDs",
-                      data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-                    }],
-                    chart: {
-                      height: 350,
-                      type: 'line',
-                      zoom: {
-                        enabled: false
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'straight'
-                    },
-                    grid: {
-                      row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
-                      },
-                    },
-                    xaxis: {
-                      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-                    }
-                  }).render();
-                });
-              </script>
-              <!-- End Line Chart -->
 
             </div>
           </div>
         </div>
 
-          
+      </section>
 
-          </div>
-
-
-      
-
-      </div>
-    </section>
-
+    </div>
   </main><!-- End #main -->
-
-
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
