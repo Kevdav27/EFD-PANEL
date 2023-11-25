@@ -1,3 +1,18 @@
+<?php
+session_start();
+include('includes/config.php');
+include('includes/checklogin.php');
+check_login();
+
+
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -341,49 +356,51 @@
                 <table class="table datatable">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Position</th>
-                      <th scope="col">Age</th>
-                      <th scope="col">Start Date</th>
+                      <th scope="col">No.</th>
+                      <th scope="col">S/N</th>
+                      <th scope="col">TYPE</th>
+                      <th scope="col">CUSTOMER</th>
+                      <th scope="col">DESCRIPTION</th>
+                      <th scope="col">ACTION</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Brandon Jacob</td>
-                      <td>Designer</td>
-                      <td>28</td>
-                      <td>2016-05-25</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Bridie Kessler</td>
-                      <td>Developer</td>
-                      <td>35</td>
-                      <td>2014-12-05</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Ashleigh Langosh</td>
-                      <td>Finance</td>
-                      <td>45</td>
-                      <td>2011-08-12</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>Angus Grady</td>
-                      <td>HR</td>
-                      <td>34</td>
-                      <td>2012-06-11</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>Raheem Lehner</td>
-                      <td>Dynamic Division Officer</td>
-                      <td>47</td>
-                      <td>2011-04-19</td>
-                    </tr>
+                      
+                    <?php	
+$aid=$_SESSION['id'];
+$ret="select * from inventory";
+$stmt= $mysqli->prepare($ret) ;
+//$stmt->bind_param('i',$aid);
+$stmt->execute() ;//ok
+$res=$stmt->get_result();
+$cnt=1;
+while($row=$res->fetch_object())
+	  {
+	  	?>
+<tr><td><?php echo $cnt;;?></td>
+
+<td><?php echo $row->s_n;?></td>
+<td><?php echo $row->type;?></td>
+<td><?php echo $row->customer;?></td>
+<td><?php echo $row->description;?></td>
+
+<td>
+<!-- <button type="button" class="btn icon icon-left btn-primary" data-bs-toggle="modal"
+                             data-bs-target="#inlineForm">
+                             Add Asset
+                         </button> -->
+                         <a href="<i data-feather="edit" class="bi bi-pen-fill"></i></a>
+
+
+</a>&nbsp;&nbsp;
+<a href="#"><i class="bi bi-trash"></i></a></td>
+</tr>
+
+
+									<?php
+$cnt=$cnt+1;
+									 } ?>
                   </tbody>
                 </table>
                 <!-- End Table with stripped rows -->
