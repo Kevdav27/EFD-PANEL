@@ -342,34 +342,34 @@ check_login();
           </ol>
         </nav>
       </div><!-- End Page Title -->
-  
+
       <section class="section">
         <div class="row">
           <div class="col-lg-12">
   
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Current EFDs</h5>
+              <h5 class="card-title">Current EFDs</h5>
                 <p>Current EFDs that are still with us, Either waiting for collection or waiting for parts</p>
-  
+  <div class="table-responsive" >
                 <!-- Table with stripped rows -->
-                <table class="table datatable">
+                <table class="table table-striped datatable">
                   <thead>
                     <tr>
-                      <th scope="col">No.</th>
+                        <th scope="col">No.</th>
                       <th scope="col">S/N</th>
                       <th scope="col">TYPE</th>
                       <th scope="col">CUSTOMER</th>
-                      <th scope="col">DESCRIPTION</th>
+                      <th scope="col">FAULTS</th>
+                      <th scope="col">STATUS</th>
                       <th scope="col">ACTION</th>
+                    
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      
-                    <?php	
+                  <?php	
 $aid=$_SESSION['id'];
-$ret="select * from inventory";
+$ret="select * from efdassets where status = 'Pending' ";
 $stmt= $mysqli->prepare($ret) ;
 //$stmt->bind_param('i',$aid);
 $stmt->execute() ;//ok
@@ -383,13 +383,11 @@ while($row=$res->fetch_object())
 <td><?php echo $row->s_n;?></td>
 <td><?php echo $row->type;?></td>
 <td><?php echo $row->customer;?></td>
+<td><?php echo $row->Fault;?></td>
 <td><?php echo $row->description;?></td>
 
 <td>
-<!-- <button type="button" class="btn icon icon-left btn-primary" data-bs-toggle="modal"
-                             data-bs-target="#inlineForm">
-                             Add Asset
-                         </button> -->
+
                          <a href="<i data-feather="edit" class="bi bi-pen-fill"></i></a>
 
 
@@ -401,9 +399,11 @@ while($row=$res->fetch_object())
 									<?php
 $cnt=$cnt+1;
 									 } ?>
+                  
                   </tbody>
                 </table>
                 <!-- End Table with stripped rows -->
+  </div>
   
               </div>
             </div>
@@ -411,6 +411,11 @@ $cnt=$cnt+1;
           </div>
         </div>
       </section>
+
+
+
+  
+    
 
   </main><!-- End #main -->
 

@@ -357,7 +357,7 @@ check_login();
                 <p>Log Records for EFDs worked </p>
   <div class="table-responsive" >
                 <!-- Table with stripped rows -->
-                <table class="table datatable">
+                <table class="table table-striped datatable">
                   <thead>
                     <tr>
                         <th scope="col">No.</th>

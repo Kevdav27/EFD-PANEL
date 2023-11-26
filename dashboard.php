@@ -536,6 +536,42 @@ check_login();
               <!-- Line Chart -->
               <div id="lineChart"></div>
 
+
+
+
+              <!-- <?php
+// Replace with your database connection details
+// $host="localhost"; 
+// $username = "root";
+// $password = "";
+// $dbname = "efddb";
+
+// // Create connection
+// $conn = new mysqli($host, $username, $password, $dbname);
+
+// // Check connection
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
+
+// // Fetch data from your database table (replace 'your_table' and 'x_column'/'y_column' with actual names)
+// $sql = "SELECT x_column, y_column FROM your_table";
+// $result = $conn->query($sql);
+
+// // Prepare data for Chart.js
+// $data = [];
+// while ($row = $result->fetch_assoc()) {
+//     $data[] = $row;
+// }
+
+// // Close the database connection
+// $conn->close();
+?> -->
+
+
+
+
+
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
                   new ApexCharts(document.querySelector("#lineChart"), {
@@ -547,11 +583,11 @@ check_login();
                       height: 350,
                       type: 'line',
                       zoom: {
-                        enabled: false
+                        enabled: true
                       }
                     },
                     dataLabels: {
-                      enabled: false
+                      enabled: true
                     },
                     stroke: {
                       curve: 'straight'
