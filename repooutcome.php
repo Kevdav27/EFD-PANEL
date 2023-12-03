@@ -325,7 +325,11 @@ check_login();
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
+  <?php
+$fdate=$_POST['fdate'];
+$tdate=$_POST['tdate'];
 
+?>
     <div class="pagetitle">
       <h1>Blank Page</h1>
       <nav>
@@ -337,37 +341,72 @@ check_login();
       </nav>
     </div><!-- End Page Title -->
 
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">EFD information </h5>
+                <p>Log Records for EFDs worked </p>
+  <div class="table-responsive" >
+                <!-- Table with stripped rows -->
+                <table class="table table-striped datatable">
+                  <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                      <th scope="col">S/N</th>
+                      <th scope="col">TYPE</th>
+                      <th scope="col">CUSTOMER</th>
+                      <th scope="col">FAULTS</th>
+                      <th scope="col">STATUS</th>
+                      <th scope="col">ACTION</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php	
+$aid=$_SESSION['id'];
+$query=mysqli_query($mysqli,"select * from efdassets where Date(repo.Date) between '$fdate' and '$tdate' "
+    );
+$cnt=1;
+while($row=mysqli_fetch_array($query)){
+?>
 
-    <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Floating labels Form</h5>
 
-              <!-- Floating Labels Form -->
-              <form class="row g-3" method="post" action="repooutcome.php">
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="date" class="form-control" id="floatingName" name="fdate">
-                    <label for="floatingName">From Date</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="date" class="form-control" id="floatingName" name="tdate" >
-                    <label for="floatingName">To Date</label>
-                  </div>
-                </div>
-              
-               
-              
-               
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-              </form><!-- End floating Labels Form -->
+<tr><td><?php echo $cnt;;?></td>
 
+<td><?php echo $row['s_n'];?></td>
+<td><?php echo $row['type']?></td>
+<td><?php echo $row['customer']?></td>
+<td><?php echo $row['Fault']?></td>
+<td><?php echo $row['status']?></td>
+
+<td>
+
+                         <a href="<i data-feather="edit" class="bi bi-pen-fill"></i></a>
+
+
+</a>&nbsp;&nbsp;
+<a href="#"><i class="bi bi-trash"></i></a></td>
+</tr>
+
+
+									<?php
+$cnt=$cnt+1;
+									 } ?>
+                  
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+  </div>
+  
+              </div>
             </div>
+  
           </div>
+        </div>
+      </section>
   
 
   </main><!-- End #main -->
