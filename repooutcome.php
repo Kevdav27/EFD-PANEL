@@ -367,7 +367,7 @@ $tdate=$_POST['tdate'];
                   <tbody>
                   <?php	
 $aid=$_SESSION['id'];
-$query=mysqli_query($mysqli,"select * from efdassets where Date(repo.Date) between '$fdate' and '$tdate' "
+$query=mysqli_query($mysqli,"select * from efdassets where Date(efdassets.Date) between '$fdate' and '$tdate' "
     );
 $cnt=1;
 while($row=mysqli_fetch_array($query)){
