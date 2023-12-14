@@ -52,7 +52,7 @@ if(isset($_GET['del']))
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -373,9 +373,9 @@ if(isset($_GET['del']))
               <div class="card-body">
                 <h5 class="card-title">EFD information </h5>
                 <p>Log Records for EFDs worked </p>
-  <div class="table-responsive" id="example" >
+  <div class="table-responsive"  >
                 <!-- Table with stripped rows -->
-                <table class="table table-striped datatable display nowrap" id="example">
+                <table class="table table-striped datatable display nowrap">
                    
                   <thead>
                     <tr>

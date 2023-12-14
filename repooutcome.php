@@ -37,6 +37,11 @@ check_login();
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
   <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -351,7 +356,7 @@ $tdate=$_POST['tdate'];
                 <p>Log Records for EFDs worked </p>
   <div class="table-responsive" >
                 <!-- Table with stripped rows -->
-                <table class="table table-striped datatable">
+                <table class="table table-striped datatable" id="example">
                   <thead>
                     <tr>
                         <th scope="col">No.</th>
@@ -360,7 +365,7 @@ $tdate=$_POST['tdate'];
                       <th scope="col">CUSTOMER</th>
                       <th scope="col">FAULTS</th>
                       <th scope="col">STATUS</th>
-                      <th scope="col">ACTION</th>
+                      
                     
                     </tr>
                   </thead>
@@ -382,13 +387,7 @@ while($row=mysqli_fetch_array($query)){
 <td><?php echo $row['Fault']?></td>
 <td><?php echo $row['status']?></td>
 
-<td>
 
-                         <a href="<i data-feather="edit" class="bi bi-pen-fill"></i></a>
-
-
-</a>&nbsp;&nbsp;
-<a href="#"><i class="bi bi-trash"></i></a></td>
 </tr>
 
 
@@ -424,6 +423,21 @@ $cnt=$cnt+1;
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
