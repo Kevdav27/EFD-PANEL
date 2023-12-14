@@ -306,7 +306,16 @@ check_login();
                       <i class="bi bi-cpu"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+
+                    <?php
+                                                $result = "SELECT COUNT(*) AS rowCount FROM efdassets WHERE DATE(Date) = CURDATE()";
+                                                $stmt = $mysqli->prepare($result);
+                                                $stmt->execute();
+                                                $stmt->bind_result($count);
+                                                $stmt->fetch();
+                                                $stmt->close();
+                                                ?>
+                      <h6><?php echo $count;?></h6>
                       
                     </div>
                   </div>
