@@ -5,7 +5,17 @@ include('includes/checklogin.php');
 check_login();
 
 
+if(isset($_GET['del']))
+{
+	$id=intval($_GET['del']);
+	$adn="delete from efdassets where id=?";
+		$stmt= $mysqli->prepare($adn);
+		$stmt->bind_param('i',$id);
+        $stmt->execute();
+        $stmt->close();	   
 
+
+}
 
 ?>
 
@@ -361,6 +371,7 @@ check_login();
                       <th scope="col">TYPE</th>
                       <th scope="col">CUSTOMER</th>
                       <th scope="col">FAULTS</th>
+                      <th scope="col">DESCRIPTION</th>
                       <th scope="col">STATUS</th>
                       <th scope="col">ACTION</th>
                     
@@ -385,14 +396,15 @@ while($row=$res->fetch_object())
 <td><?php echo $row->customer;?></td>
 <td><?php echo $row->Fault;?></td>
 <td><?php echo $row->description;?></td>
+<td><?php echo $row->status;?></td>
 
 <td>
 
-                         <a href="<i data-feather="edit" class="bi bi-pen-fill"></i></a>
+<a href="assetseedit.php?id=<?php echo $row->id;?>" title="Edit Record" class="bi bi-pen-fill"></i></a>
 
 
 </a>&nbsp;&nbsp;
-<a href="#"><i class="bi bi-trash"></i></a></td>
+<a href="assets.php?del=<?php echo $row->id;?>" title="Delete Record" onclick="return confirm('Do you want to delete');"><i class="bi bi-trash"></i></a></td>
 </tr>
 
 

@@ -377,7 +377,7 @@ check_login();
                   
                 
                   <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3" name="dsc" value="<?php echo $row->description;?>"></textarea>
+                                            rows="3" name="dsc" ></textarea>
 
                 </div>
                 <div class="col-md-6">
