@@ -142,71 +142,7 @@ check_login();
 
         </li><!-- End Notification Nav -->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
+   
 
         <li class="nav-item dropdown pe-3">
 
@@ -470,9 +406,63 @@ check_login();
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                  <h5 class="card-title">Recent machines <span>| Today</span></h5>
 
-                  <table class="table table-borderless datatable">
+                  <div class="table-responsive" >
+                <!-- Table with stripped rows -->
+                <table class="table table-striped datatable display nowrap" id="example">
+                   
+                  <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                      <th scope="col">S/N</th>
+                      <th scope="col">TYPE</th>
+                      <th scope="col">CUSTOMER</th>
+                      <th scope="col">FAULTS</th>
+                      <th scope="col">STATUS</th>
+                
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php	
+$aid=$_SESSION['id'];
+$ret="select * from efdassets order by Date DESC";
+$stmt= $mysqli->prepare($ret) ;
+//$stmt->bind_param('i',$aid);
+$stmt->execute() ;//ok
+$res=$stmt->get_result();
+$cnt=1;
+while($row=$res->fetch_object())
+	  {
+	  	?>
+<tr><td><?php echo $cnt;;?></td>
+
+<td><?php echo $row->s_n;?></td>
+<td><?php echo $row->type;?></td>
+<td><?php echo $row->customer;?></td>
+<td><?php echo $row->Fault;?></td>
+<td ><?php echo $row->status;?></td>
+
+
+</tr>
+
+
+									<?php
+$cnt=$cnt+1;
+									 } ?>
+                  
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+  </div>
+
+
+
+
+
+
+
+                  <!-- <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -519,7 +509,7 @@ check_login();
                         <td><span class="badge bg-success">Approved</span></td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
 
                 </div>
 

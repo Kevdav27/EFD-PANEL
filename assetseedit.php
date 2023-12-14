@@ -5,17 +5,6 @@ include('includes/checklogin.php');
 check_login();
 
 
-if(isset($_GET['del']))
-{
-	$id=intval($_GET['del']);
-	$adn="delete from efdassets where id=?";
-		$stmt= $mysqli->prepare($adn);
-		$stmt->bind_param('i',$id);
-        $stmt->execute();
-        $stmt->close();	   
-
-
-}
 
 
 
@@ -349,96 +338,68 @@ if(isset($_GET['del']))
 
 
 
+  <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Edit Page</h5>
 
+              <!-- Multi Columns Form -->
+              <form class="row g-3">
 
-
-
-    
-    <div class="pagetitle">
-        <h1>EFD Table</h1>
-        <nav>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-            <li class="breadcrumb-item">Tables</li>
-            <li class="breadcrumb-item active">Data</li>
-          </ol>
-        </nav>
-      </div><!-- End Page Title -->
-  
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-12">
-  
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">EFD information </h5>
-                <p>Log Records for EFDs worked </p>
-  <div class="table-responsive" id="example" >
-                <!-- Table with stripped rows -->
-                <table class="table table-striped datatable display nowrap" id="example">
-                   
-                  <thead>
-                    <tr>
-                        <th scope="col">No.</th>
-                      <th scope="col">S/N</th>
-                      <th scope="col">TYPE</th>
-                      <th scope="col">CUSTOMER</th>
-                      <th scope="col">FAULTS</th>
-                      <th scope="col">STATUS</th>
-                      <th scope="col">ACTION</th>
-                    
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <?php	
-$aid=$_SESSION['id'];
-$ret="select * from efdassets";
-$stmt= $mysqli->prepare($ret) ;
-//$stmt->bind_param('i',$aid);
-$stmt->execute() ;//ok
-$res=$stmt->get_result();
-$cnt=1;
-while($row=$res->fetch_object())
-	  {
-	  	?>
-<tr><td><?php echo $cnt;;?></td>
-
-<td><?php echo $row->s_n;?></td>
-<td><?php echo $row->type;?></td>
-<td><?php echo $row->customer;?></td>
-<td><?php echo $row->Fault;?></td>
-<td><?php echo $row->status;?></td>
-
-<td>
-
-                         <a href="assetseedit.php?id=<?php echo $row->id;?>" title="Edit Record" class="bi bi-pen-fill"></i></a>
-
-
-</a>&nbsp;&nbsp;
-
-
-<a href="assets.php?del=<?php echo $row->id;?>" title="Delete Record" onclick="return confirm('Do you want to delete');"><i class="bi bi-trash"></i></a></td>
-
-
-
-</tr>
-
-
-									<?php
-$cnt=$cnt+1;
-									 } ?>
+              <?php	
+												$id=$_GET['id'];
+                                                $ret="select * from efdassets where id=?";
+                                                $stmt= $mysqli->prepare($ret) ;
+                                                $stmt->bind_param('i',$id);
+                                                $stmt->execute() ;//ok
+                                                $res=$stmt->get_result();
+                                                //$cnt=1;
+                                                while($row=$res->fetch_object())
+                                                {
+                                                    ?>
+                <div class="col-md-6">
+                  <label for="inputName5" class="form-label">S/N</label>
+                  <input type="text" class="form-control" id="inputName5" value="<?php echo $row->s_n;?>">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputEmail5" class="form-label">TYPE</label>
+                  <input type="email" class="form-control" id="inputEmail5" value="<?php echo $row->type;?>">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword5" class="form-label">CUSTOMER</label>
+                  <input type="text" class="form-control" id="inputPassword5" value="<?php echo $row->customer;?>">
+                </div>
+                <div class="col-6">
+                  <label for="inputAddress5" class="form-label">FAULT</label>
+                  <input type="text" class="form-control" id="inputAddres5s" placeholder="1234 Main St" value="<?php echo $row->Fault;?>">
+                </div>
+                <div class="col-6">
+                  <label for="inputAddress2" class="form-label">DESCRIPTION</label>
                   
-                  </tbody>
-                </table>
-                <!-- End Table with stripped rows -->
-  </div>
-  
-              </div>
+                
+                  <textarea class="form-control" id="exampleFormControlTextarea1"
+                                            rows="3" name="dsc" value="<?php echo $row->description;?>"></textarea>
+
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">STATUS</label>
+                  <input type="text" class="form-control" id="inputCity" value="<?php echo $row->status;?>">
+                </div>
+                
+               
+                
+                <?php } ?>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End Multi Columns Form -->
+
             </div>
-  
           </div>
-        </div>
-      </section>
+
+
+
+  
 
   </main><!-- End #main -->
 
